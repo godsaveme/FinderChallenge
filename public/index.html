@@ -6,6 +6,7 @@
     <meta viewport="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css?family=Proxima+Nova" rel="stylesheet" type="text/css">
     <link href="/vendor/pure/pure-min.css" rel="stylesheet">
+    <link href="/vendor/awesomplete/awesomplete.css" rel="stylesheet">
     <link href="/styles/index.css" rel="stylesheet">
     <script src="/scripts/global.js"></script>
     <script src="/scripts/search-form.js"></script>
@@ -17,7 +18,7 @@
         <div class="pure-u-1-3">
           <h1 class="logo">Finder challenge!</h1>
         </div>
-        <div class="pure-u-7-24">
+        <div class="pure-u-1-3">
           <div class="search-form">
             <form class="pure-form" id="searchForm" method="GET" onsubmit="return SearchForm(true)">
               <fieldset>
@@ -57,7 +58,13 @@
         </div>
         <div class="pure-u-1-3"></div>
       </header>
-      <aside class="filters pure-u-1-4">aside</aside>
+      <aside class="filters pure-u-1-4"> 
+        <h3>Búsquedas guardadas</h3>
+        <h3>Categorías</h3>
+        <h3>Idioma</h3>
+        <h3>Publicación</h3>
+        <h3>Presentación</h3>
+      </aside>
       <content class="pure-u-3-4">
         <div id="booksContent">
           <div class="pure-g" id="booksRow"></div>
@@ -101,8 +108,9 @@
           }
         </script>
       </content>
-      <footer class="pure-u-1">footer</footer>
+      <footer class="pure-u-1"> </footer>
     </div>
     <script src="/vendor/underscore/underscore-min.js"></script>
+    <script src="/vendor/awesomplete/awesomplete.min.js"></script>
   </body>
 </html>
