@@ -1,6 +1,35 @@
 .search-form
-    form.pure-form(method='POST' action='/register')
+    form.pure-form(id='searchForm' method='GET' onsubmit='return SearchForm(true)')
         fieldset
-            input(type='text')
+            input(type='text' id='inputSearch')
             button.pure-button.pure-button-primary(type='submit') Buscar
+
+script.
+    document.getElementById("searchForm").addEventListener("submit", function(event){
+        event.preventDefault();
+    });
+
+    /**
+     * flag: para validar si viene desde el onload o 
+     * lanzado por el usuario
+     */
+
+    function SearchForm(flag){
+
+        var search = location.hash.replace(/\/|#/gi,'');
+        if(search.length > 0 && !flag){
+            document.getElementById("inputSearch").value = search;
+        }
+        var inputValue = document.getElementById("inputSearch").value;
+        console.log(inputValue);
+        location.hash = '/' + inputValue;
+        console.log(location.hash);
+        var tmp = dataRaw.data.filter(function(book){ 
+            //console.log(book.title);
+            return book.title.toUpperCase().includes(inputValue.toUpperCase());
+        });
+        console.log(tmp);
+        CreateBooks(tmp);
+    }
+
     

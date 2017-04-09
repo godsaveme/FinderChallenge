@@ -19,13 +19,41 @@
         </div>
         <div class="pure-u-7-24">
           <div class="search-form">
-            <form class="pure-form" method="POST" action="/register">
+            <form class="pure-form" id="searchForm" method="GET" onsubmit="return SearchForm(true)">
               <fieldset>
-                <input type="text">
+                <input type="text" id="inputSearch">
                 <button class="pure-button pure-button-primary" type="submit">Buscar</button>
               </fieldset>
             </form>
           </div>
+          <script>
+            document.getElementById("searchForm").addEventListener("submit", function(event){
+                event.preventDefault();
+            });
+            
+            /**
+             * flag: para validar si viene desde el onload o 
+             * lanzado por el usuario
+             */
+            
+            function SearchForm(flag){
+            
+                var search = location.hash.replace(/\/|#/gi,'');
+                if(search.length > 0 && !flag){
+                    document.getElementById("inputSearch").value = search;
+                }
+                var inputValue = document.getElementById("inputSearch").value;
+                console.log(inputValue);
+                location.hash = '/' + inputValue;
+                console.log(location.hash);
+                var tmp = dataRaw.data.filter(function(book){ 
+                    //console.log(book.title);
+                    return book.title.toUpperCase().includes(inputValue.toUpperCase());
+                });
+                console.log(tmp);
+                CreateBooks(tmp);
+            }
+          </script>
         </div>
         <div class="pure-u-1-3"></div>
       </header>
@@ -36,25 +64,40 @@
         </div>
         <script>
           loadJSON(JSON_FILE,function(response){
-              RenderHtml(response);
+              RenderBooks(response);
           })
-          function RenderHtml(response){
+          
+          var dataRaw;
+          
+          function RenderBooks(response){
               //_.each(response.data, function(books){
-                  CreateItems(response.data);
+                  dataRaw = response;
+                  CreateBooks(response.data);
                   console.log(response.data);
               //})
           }
           
-          function CreateItems(books){
+          function CreateBooks(books){
               var booksRow = window.document.getElementById("booksRow");
+              booksRow.innerHTML = '';
               for (var i = 0; i < books.length; i++) {
-                  var div = document.createElement("DIV");
-                  //var txt = document.createTextNode("Thirds");
-                  div.className = "pure-u-1-3";
-                  //div.appendChild(txt);
-                  div.innerHTML = '<img src='+books[i].image+'>';
-                  booksRow.appendChild(div);
+                  var book = new Book(books[i]);
+                  booksRow.appendChild(book.createHtml());
               }
+          }
+          
+          function Book(book){
+              this.image = book.image;
+              this.title = book.title;
+              this.teaser = book.teaser;
+              this.createHtml = function() {
+                  var div = document.createElement("DIV");
+                  div.className = "pure-u-1-3";
+                  div.innerHTML = '<img src='+this.image+'>'  +
+                                  '<h3>'+this.title+'</h3>'   +
+                                  '<p>'+this.teaser+'</p>'    ;
+                  return div;
+              };
           }
         </script>
       </content>
