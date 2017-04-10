@@ -16,9 +16,5 @@ function AwesompleteCreate(){
             return book.title;
         })
     });
-    //console.log(_.map(dataRaw.data, function(data){
-    //  return data.title;
-    //}));
-    //console.log(dataRaw.data);
 }
 
