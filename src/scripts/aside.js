@@ -1,4 +1,4 @@
-window.onload = function () {
+function RenderAsideBlock(){
     var savedSearch = window.document.getElementById("saved"),
         labels = dataRaw.entities.saved,
 
@@ -15,8 +15,7 @@ window.onload = function () {
     RenderAside(categories, cat);
     RenderAside(languages, langs);
     RenderAside(presentation, editions);
-
-};
+}
 
 function RenderAside(ul, obj, flagURL) {
     for (var key in obj) {

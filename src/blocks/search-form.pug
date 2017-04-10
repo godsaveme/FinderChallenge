@@ -21,14 +21,10 @@ script.
             document.getElementById("inputSearch").value = search;
         }
         var inputValue = document.getElementById("inputSearch").value;
-        console.log(inputValue);
         location.hash = '/' + inputValue;
-        console.log(location.hash);
         var tmp = dataRaw.data.filter(function(book){ 
-            //console.log(book.title);
             return book.title.toUpperCase().includes(inputValue.toUpperCase());
         });
-        console.log(tmp);
         CreateBooks(tmp);
     }
 

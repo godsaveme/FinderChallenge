@@ -7,11 +7,8 @@ script.
     var dataRaw;
 
     function RenderBooks(response){
-        //_.each(response.data, function(books){
             dataRaw = response;
             CreateBooks(response.data);
-            console.log(response.data);
-        //})
     }
 
     function CreateBooks(books){
