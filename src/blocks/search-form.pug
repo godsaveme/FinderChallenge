@@ -1,8 +1,8 @@
 .search-form
     form.pure-form(id='searchForm' method='GET' onsubmit='return SearchForm(true)')
         fieldset
-            input(type='text' id='inputSearch')
-            button.pure-button.pure-button-primary(type='submit') Buscar
+            input(type='text' id='inputSearch' onkeyup='FormChange()' onchange='FormChange()')
+            button#btnSubmit.pure-button.pure-button-primary(type='submit') Buscar
 
 script.
     document.getElementById("searchForm").addEventListener("submit", function(event){
@@ -30,6 +30,15 @@ script.
         });
         console.log(tmp);
         CreateBooks(tmp);
+    }
+
+    function FormChange(){
+        var inputValue = document.getElementById("inputSearch").value;
+        if(inputValue.length > 2) {
+            document.getElementById("btnSubmit").removeAttribute('disabled','disabled');
+        }else{
+            document.getElementById("btnSubmit").setAttribute('disabled','disabled');
+        }
     }
 
     

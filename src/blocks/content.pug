@@ -1,5 +1,4 @@
 #booksContent
-    #booksRow.pure-g
 script.
     loadJSON(JSON_FILE,function(response){
         RenderBooks(response);
@@ -16,11 +15,16 @@ script.
     }
 
     function CreateBooks(books){
-        var booksRow = window.document.getElementById("booksRow");
-        booksRow.innerHTML = '';
+        var booksContent = window.document.getElementById("booksContent");
+        booksContent.innerHTML = '';
         for (var i = 0; i < books.length; i++) {
+            if (i % 3 === 0){
+                var div = window.document.createElement("DIV");
+                div.className = "pure-g";
+            }
+            booksContent.appendChild(div);
             var book = new Book(books[i]);
-            booksRow.appendChild(book.createHtml());
+            div.appendChild(book.createHtml());
         }
     }
 
